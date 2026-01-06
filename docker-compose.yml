@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    networks:
+      - proxy-net
+    environment:
+      - WEBHOOK_URL=https://example.ru/ ## Убери, если не надо
+      - N8N_SECURE_COOKIE=false ## default: true, если https
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - telegram_worker
+
+  telegram_worker:
+    build: ./telegram_worker
+    restart: unless-stopped
+    networks:
+      - proxy-net
+    environment:
+      - TG_API_ID=${TG_API_ID}
+      - TG_API_HASH=${TG_API_HASH}
+    volumes:
+      - ./telegram_worker/session:/app/session
+    ports:
+      - "127.0.0.1:8099:8099"
+
+networks:
+  proxy-net:
+    external: true
+
+volumes:
+  n8n_data:

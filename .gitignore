@@ -1,0 +1,16 @@
+# Session
+telegram_worker/session/
+*.session
+
+# Env
+.env
+
+# Logs
+*.log
+
+# Docker
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
