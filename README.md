@@ -61,7 +61,7 @@
 
 ```bash
 # Клонируйте репозиторий
-git clone <ваш-репозиторий>
+git clone https://github.com/thekocapb/n8n-telegram-teletron-
 cd n8n-telegram-teletr
 
 # Скопируйте файл с переменными окружения
